@@ -15,4 +15,14 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/:id', (req, res, next) => {
+  queries.getPost(req.params.id)
+    .then((result) => {
+      res.json(result);
+    }).catch((error) => {
+      res.sendStatus(500);
+      console.error(error);
+    })
+});
+
 module.exports = router;
