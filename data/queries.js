@@ -10,6 +10,7 @@ module.exports = {
 					"post.title as title",
 					"post.body as body",
 					"post.image as image",
+					"post.place_id as place_id",
 					"post.created_at as date",
 					"place.name as place"
 				]
