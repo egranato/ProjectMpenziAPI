@@ -36,7 +36,23 @@ module.exports = {
 				this.on('post.place_id', '=', 'place.id')
 			});
 	},
+	newPost: (postObj) => {
+		return db('post')
+			.insert(postObj)
+			.returning('id');
+	},
 	// Places
+	newPlace: (name) => {
+		return db('place')
+			.insert({ name })
+			.returning('id');
+	},
+	checkPlace: (name) => {
+		return db('place')
+			.where('name', name)
+			.select('id')
+			.first();
+	},
 	getPlaces: () => {
 		return db('place')
 			.select('*');
@@ -57,5 +73,10 @@ module.exports = {
 			.innerJoin("place", function () {
 				this.on('post.place_id', '=', 'place.id')
 			});
+	},
+	// Dates
+	getDates: () => {
+		return db('post')
+			.select(['id', 'created_at']);
 	}
 };
