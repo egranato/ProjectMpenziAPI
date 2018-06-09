@@ -84,5 +84,15 @@ module.exports = {
 		return db('author')
 			.select('*')
 			.first();
+	},
+	// Admin
+	checkAdmin: () => {
+		return db('admin')
+			.select('id');
+	},
+	addAdmin: (adminObj) => {
+		return db('admin')
+			.insert(adminObj)
+			.returning('id');
 	}
 };

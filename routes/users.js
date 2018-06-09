@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const queries = require('../data/queries');
-var router = express.Router();
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {

@@ -5,6 +5,7 @@ const logger = require('morgan');
 const postsRouter = require('./routes/posts');
 const placesRouter = require('./routes/places');
 const authorRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
 const app = express();
 
 app.use(logger('dev'));
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 app.use('/api/posts', postsRouter);
 app.use('/api/places', placesRouter);
 app.use('/api/author', authorRouter);
+app.use('/api/index', indexRouter);
 // protected routes
 
 module.exports = app;
