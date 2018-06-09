@@ -1,9 +1,16 @@
 var express = require('express');
+const queries = require('../data/queries');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', function (req, res, next) {
+  queries.getAuthorInfo()
+    .then((result) => {
+      res.json(result);
+    }).catch((error) => {
+      res.sendStatus(500);
+      console.error(error);
+    });
 });
 
 module.exports = router;

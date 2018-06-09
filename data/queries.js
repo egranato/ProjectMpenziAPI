@@ -78,5 +78,11 @@ module.exports = {
 	getDates: () => {
 		return db('post')
 			.select(['id', 'created_at']);
+	},
+	// Author
+	getAuthorInfo: () => {
+		return db('author')
+			.select('*')
+			.first();
 	}
 };
