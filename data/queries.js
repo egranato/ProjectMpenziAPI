@@ -29,7 +29,8 @@ module.exports = {
 					"post.body as body",
 					"post.image as image",
 					"post.created_at as date",
-					"place.name as place"
+					"place.name as place",
+					"post.place_id as place_id"
 				]
 			)
 			.first()
