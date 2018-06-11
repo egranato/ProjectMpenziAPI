@@ -96,5 +96,16 @@ module.exports = {
 		return db('admin')
 			.insert(adminObj)
 			.returning('id');
+	},
+	getUser: (username) => {
+		return db('admin')
+			.select('*')
+			.where('username', username)
+			.first();
+	},
+	newPost: (postObj) => {
+		return db('post')
+			.insert(postObj)
+			.returning('id');
 	}
 };

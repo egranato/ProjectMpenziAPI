@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const queries = require('../data/queries');
 
-require('dotenv').load();
-
 router.get('/', (req, res, next) => {
   queries.getPlaces()
     .then((results) => {

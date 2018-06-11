@@ -3,12 +3,12 @@ const queries = require('../data/queries');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
+require('dotenv').load();
 
 const createToken = (user) => {
   const data = {
     user: {
       id: user.id,
-      email: user.email,
       username: user.username,
       admin: user.admin
     },
@@ -20,7 +20,6 @@ const createToken = (user) => {
   return token;
 };
 
-/* GET home page. */
 router.post('/', (req, res, next) => {
   queries.checkAdmin()
     .then((results) => {
@@ -47,8 +46,29 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.get('/', (req, res, next) => {
-
+router.post('/login', (req, res, next) => {
+  console.log(req.body);
+  queries.getUser(req.body.username)
+    .then((result) => {
+      if (result) {
+        console.log(result);
+        bcrypt.compare(req.body.digest, result.digest, (err, response) => {
+          if (err) throw err;
+          if (response) {
+            result.admin = true;
+            const token = createToken(result);
+            res.json({ token });
+          } else {
+            res.sendStatus(401);
+          }
+        });
+      } else {
+        res.sendStatus(400);
+      }
+    }).catch((error) => {
+      res.sendStatus(500);
+      console.error(error);
+    });
 });
 
 module.exports = router;
