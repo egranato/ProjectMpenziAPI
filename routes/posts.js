@@ -119,56 +119,56 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
-  const ogPost = req.body;
-  if (checkPost(ogPost)) {
-    queries.checkPlace(ogPost.place)
-      .then((result) => {
-        if (result) {
-          const post = {
-            title: ogPost.title,
-            body: ogPost.body,
-            place_id: result.id
-          };
-          if (ogPost.image) {
-            post.image = ogPost.image;
-          }
-          queries.newPost(post)
-            .then((result) => {
-              res.json({ result: result[0] });
-            }).catch((error) => {
-              res.sendStatus(500);
-              console.error(error);
-            });
-        } else {
-          queries.newPlace(ogPost.place)
-            .then((result) => {
-              const post = {
-                title: ogPost.title,
-                body: ogPost.body,
-                place_id: result.id
-              };
-              if (ogPost.image) {
-                post.image = ogPost.image;
-              }
-              queries.newPost(post)
-                .then((result) => {
-                  res.json({ result: result[0] });
-                }).catch((error) => {
-                  res.sendStatus(500);
-                  console.error(error);
-                });
-            }).catch((error) => {
-              throw error;
-            });
-        }
-      }).catch((error) => {
-        res.sendStatus(500);
-        console.error(error);
-      });
-  } else {
-    res.sendStatus(400);
-  }
-});
+// router.post('/', (req, res, next) => {
+//   const ogPost = req.body;
+//   if (checkPost(ogPost)) {
+//     queries.checkPlace(ogPost.place)
+//       .then((result) => {
+//         if (result) {
+//           const post = {
+//             title: ogPost.title,
+//             body: ogPost.body,
+//             place_id: result.id
+//           };
+//           if (ogPost.image) {
+//             post.image = ogPost.image;
+//           }
+//           queries.newPost(post)
+//             .then((result) => {
+//               res.json({ result: result[0] });
+//             }).catch((error) => {
+//               res.sendStatus(500);
+//               console.error(error);
+//             });
+//         } else {
+//           queries.newPlace(ogPost.place)
+//             .then((result) => {
+//               const post = {
+//                 title: ogPost.title,
+//                 body: ogPost.body,
+//                 place_id: result.id
+//               };
+//               if (ogPost.image) {
+//                 post.image = ogPost.image;
+//               }
+//               queries.newPost(post)
+//                 .then((result) => {
+//                   res.json({ result: result[0] });
+//                 }).catch((error) => {
+//                   res.sendStatus(500);
+//                   console.error(error);
+//                 });
+//             }).catch((error) => {
+//               throw error;
+//             });
+//         }
+//       }).catch((error) => {
+//         res.sendStatus(500);
+//         console.error(error);
+//       });
+//   } else {
+//     res.sendStatus(400);
+//   }
+// });
 
 module.exports = router;
