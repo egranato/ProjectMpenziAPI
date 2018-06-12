@@ -87,6 +87,11 @@ module.exports = {
 			.select('*')
 			.first();
 	},
+	updateAuthor: (authorObj) => {
+		return db('author')
+			.update(authorObj)
+			.return('*');
+	},
 	// Admin
 	checkAdmin: () => {
 		return db('admin')

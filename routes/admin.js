@@ -64,4 +64,14 @@ router.post('/post', (req, res, next) => {
     })
 });
 
+router.post('/welcome', (req, res, next) => {
+  queries.updateAuthor(req.body.author)
+    .then((response) => {
+
+    }).catch((error) => {
+      res.sendStatus(500);
+      console.error(error);
+    });
+});
+
 module.exports = router;
