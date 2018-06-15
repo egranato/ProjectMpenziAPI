@@ -17,17 +17,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // CORS
 app.use((req, res, next) => {
     const origin = req.headers['origin'];
-    // if (origin.indexOf('lo') !== -1) {
-    // res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-    // } else {
-    res.header('Access-Control-Allow-Origin', origin);
-    // }
+    if (origin === "http://www.projectmpenzi.com" || origin === "http://projectmpenzi.com") {
+        res.header('Access-Control-Allow-Origin', origin);
+    }
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
     res.header('Access-Control-Allow-Credentials', 'true');
     if (req.method === 'OPTIONS') {
-        res.send({ origin });
-        //     res.sendStatus(200);
+        res.sendStatus(200);
     } else {
         next();
     }
