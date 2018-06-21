@@ -1,6 +1,6 @@
 {
-  "name": "new-back-end",
-  "version": "0.0.0",
+  "name": "project-mpenzi-api",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
