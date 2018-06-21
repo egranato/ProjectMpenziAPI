@@ -1,7 +1,6 @@
 const express = require('express');
 const queries = require('../data/queries');
 const jwt = require('jsonwebtoken');
-const azure = require('azure-storage');
 const router = express.Router();
 require('dotenv').load();
 
