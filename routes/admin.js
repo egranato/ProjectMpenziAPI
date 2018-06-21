@@ -22,8 +22,8 @@ router.use((req, res, next) => {
       }
     });
   } catch (error) {
-    res.statusStatus(401);
-    console.error(error);
+    res.status(401);
+    res.json({ error });
   }
 });
 
@@ -64,10 +64,11 @@ router.post('/post', (req, res, next) => {
     })
 });
 
-router.post('/welcome', (req, res, next) => {
+router.post('/author', (req, res, next) => {
+  console.log(req.body);
   queries.updateAuthor(req.body.author)
     .then((response) => {
-
+      res.json(response);
     }).catch((error) => {
       res.sendStatus(500);
       console.error(error);

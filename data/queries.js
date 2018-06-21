@@ -87,10 +87,19 @@ module.exports = {
 			.select('*')
 			.first();
 	},
+	initializeAuthor: () => {
+		return db('author')
+			.insert({
+				welcome: 'Welcome to Project Mpenzi!',
+				body: 'We are happy to have you here!'
+			})
+			.returning('*');
+	},
 	updateAuthor: (authorObj) => {
 		return db('author')
 			.update(authorObj)
-			.return('*');
+			.where('id', 1)
+			.returning('*');
 	},
 	// Admin
 	checkAdmin: () => {

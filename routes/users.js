@@ -6,7 +6,16 @@ const router = express.Router();
 router.get('/', function (req, res, next) {
   queries.getAuthorInfo()
     .then((result) => {
-      res.json(result);
+      if (result) {
+        res.json(result);
+      } else {
+        queries.initializeAuthor()
+          .then((result) => {
+            res.json(result[0]);
+          }).catch((error) => {
+            throw error;
+          });
+      }
     }).catch((error) => {
       res.sendStatus(500);
       console.error(error);
